@@ -1,6 +1,8 @@
 
 <!-- preventing Hacking Attempts using placeholders
+safely acces MySQL and prevent XSS attacks
 
+function mysql_entities_fix_string($conn,$string)
 function mysql_fix_string($conn,$string) = in connection.php
 DB= go 
 tabel = username
@@ -39,8 +41,8 @@ ready made method called prepare
         $stmt->bind_param('sss',$id,$username,$password);
         // variablelen vullen met een waarde
         $id = '';
-        $username= $_POST['user'];
-        $password= $_POST['pass'];
+        $username= mysql_entities_fix_string($conn,$_POST['user']);
+        $password= mysql_entities_fix_string($conn,$_POST['pass']);
         //$username= 'jo';
         //$password= 'jojo';          
        // statement executen            
