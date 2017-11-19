@@ -5,5 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
             <name>study_Accessing_MySQL_using_php</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>idnumber</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>
