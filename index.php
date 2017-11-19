@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!-- using insert IDs to make relation between 2 tables-->
+
+<?php include 'connection.php'; ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -11,7 +9,19 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
+        $conn=connectDB();
+        $sql = "INSERT INTO cats value (NULL,'Lynx','Stumpy','5')";
+        $result = $conn->query($sql);
+        $insertID = $conn-> insert_id;
+        
+        $sql= "INSERT INTO owners value ($insertID,'Ann','Smith')";
+        $result = $conn->query($sql);
         ?>
     </body>
+    <!-- resultaat:
+    
+    ID 3 in tabel cats wordt ook in tabel owners 3 in kolom ID
+    
+    -->
+    
 </html>
