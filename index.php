@@ -1,9 +1,10 @@
 
-<!-- preventing Hacking Attempts
+<!-- preventing Hacking Attempts using placeholders
 
 function mysql_fix_string($conn,$string) = in connection.php
 DB= go 
 tabel = username
+ready made method called prepare
 
 -->
 <html>
@@ -18,16 +19,37 @@ tabel = username
     </script>
     </head>
     <body>
+        
+        <form action="index.php" method="POST">
+        <input type="text" name="user">
+        <input type="text" name="pass">
+        <input type="submit" name="SEND">
+        <br>
+                
+        
+        
+    </form> 
             <button class="knop" onclick="toFormInlog()">INLOG</button>
 
         <?php
         require_once 'connection.php';
         $conn=connectDB();
-        
-        $user = mysql_fix_string($conn, $_POST['user']);
-        $password = mysql_fix_string($conn, $_POST['pass']);
-        $sql = "SELECT * FROM username WHERE username = '$user' AND password = '$password'";
-    
+        // statement opmaken met ? en vervolgens variabele binden aan ?
+        $stmt = $conn->prepare('INSERT INTO username values(?,?,?)');
+        $stmt->bind_param('sss',$id,$username,$password);
+        // variablelen vullen met een waarde
+        $id = '';
+        $username= $_POST['user'];
+        $password= $_POST['pass'];
+        //$username= 'jo';
+        //$password= 'jojo';          
+       // statement executen            
+        $stmt->execute();
+        // controle uitvoer statement
+        printf("%d Row inserted.\n",$stmt->affected_rows);
+        // sluiten statement en sluiten DB connectie
+        $stmt->close();
+        $conn->close();
         
         
         
